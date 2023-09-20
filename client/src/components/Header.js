@@ -15,12 +15,12 @@ const Header = ({ currentUser }) => {
 
 const Container = styled.div`
   box-sizing: border-box;
-  height: 13%;
+  height: 10%;
   width:100%;
-  border: 2px solid ;
   display: flex;
   padding:10px;
   align-items: center;
+  background-color: white;
   div{
     img{
         padding-right:18px;

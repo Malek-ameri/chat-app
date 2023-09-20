@@ -3,14 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Input from './Input';
+import Message from './Message';
 
 
 const ChatContent = ({ currentUser }) => {
-    console.log(currentUser)
     return (
         <>
             <Container>
                 <Header currentUser={currentUser} />
+                <Message />
                 <Input />
             </Container>
         </>

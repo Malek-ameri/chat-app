@@ -132,9 +132,5 @@
 }
 
 h6 {
-  width: 100%;
-  border: 2px solid ;
-  display: flex;
-  box-sizing: border-box;
-  align-items: center;
+ width: auto;
 }

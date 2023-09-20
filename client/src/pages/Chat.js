@@ -36,7 +36,6 @@ const Chat = () => {
     }, [])
 
     const changeCurrentUserHandler = (index, data) => {
-        console.log(data)
         setCurrentUser(data)
     }
 
@@ -60,7 +59,6 @@ const Chat = () => {
 const Container = styled.div`
   display: flex;
   font-size: 20px;
-  border: 5px solid red;
   width: 75vw;
   height: 75vh;
   .contacts{
