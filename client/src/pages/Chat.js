@@ -49,7 +49,7 @@ const Chat = () => {
                             <Contacts user={user} contacts={contacts} changeHandler={changeCurrentUserHandler} />
                         </div>
 
-                        {currentUser ? <ChatContent currentUser={currentUser} /> : <Welcom user={user} />}
+                        {currentUser ? <ChatContent user={user} currentUser={currentUser} /> : <Welcom user={user} />}
                     </Container>
                 </div> : <h1>loading</h1>}
         </>)

@@ -14,13 +14,13 @@ const getAllMessage = asyncHandler(async (req, res, next) => {
 
     const projectedMessages = messages.map((msg) => {
         return {
+            id:msg._id,
             fromSelf: msg.sender.toString() === from,
             message: msg.message.text,
         };
     });
 
     res.json(projectedMessages);
-
 });
 
 const addMessage = asyncHandler(async (req, res, next) => {

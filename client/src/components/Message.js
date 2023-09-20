@@ -3,10 +3,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const Message = () => {
+const Message = ({ messages }) => {
+    console.log(messages)
     return (
         <Container>
-            message
+            {
+                messages.map(msg => <div key={msg.id} >{msg.message}</div>)
+            }
         </Container>
     );
 };
