@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Header from './Header';
+import Input from './Input';
 
 
 const ChatContent = ({ currentUser }) => {
@@ -10,6 +11,7 @@ const ChatContent = ({ currentUser }) => {
         <>
             <Container>
                 <Header currentUser={currentUser} />
+                <Input />
             </Container>
         </>
     );

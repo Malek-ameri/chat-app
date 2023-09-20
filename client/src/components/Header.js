@@ -15,7 +15,7 @@ const Header = ({ currentUser }) => {
 
 const Container = styled.div`
   box-sizing: border-box;
-  height: 15%;
+  height: 13%;
   width:100%;
   border: 2px solid ;
   display: flex;
