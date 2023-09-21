@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { io } from 'socket.io-client';
 
 import api from '../interceptor/axios';
 import Contacts from '../components/Contacts';
@@ -9,6 +10,10 @@ import Welcom from '../components/Welcom';
 import ChatContent from '../components/ChatContent';
 
 const Chat = () => {
+
+    const socket = io("http://localhost:4000", {
+    })
+
     const navigate = useNavigate()
 
     const [user, setUser] = useState(null)

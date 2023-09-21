@@ -87,7 +87,6 @@ const userAuthentication = asyncHandler(async (req, res, next) => {
 const generateToken = asyncHandler(async (req, res, next) => {
 
     const {refreshToken = null} = req.body
-    console.log(refreshToken)
 
     if (!refreshToken) {
         return next(new AppError(401, 'refresh token missing'));
