@@ -1,16 +1,21 @@
-import React from 'react';
+import React,{useRef,useEffect} from 'react';
 
 import styled from 'styled-components';
 
 
 const Message = ({ messages }) => {
+    const scrollRef = useRef(null);
+
+    useEffect(() => {
+        scrollRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    },[messages])
 
     return (
-        <Container>
+        <Container   >
             {
-                messages.map(msg => <div key={msg.id}  className={`message ${msg.fromSelf ? "user-message" : "current-user-msg"}`} ><p>{msg.message}</p></div>)
+                messages.map(msg => <div ref={scrollRef} key={msg.id}  className={`message ${msg.fromSelf ? "user-message" : "current-user-msg"}`} ><p>{msg.message}</p></div>)
             }
-        </Container>
+        </Container >
     );
 };
 
@@ -19,6 +24,14 @@ const Container = styled.div`
   width:100%;
   overflow: auto;
   background-color: #e6eaea;
+  &::-webkit-scrollbar {
+    width: 0.2rem;
+    &-thumb {
+      background-color: #32465a;
+      width: 0.1rem;
+      border-radius: 1rem;
+    }
+  }
     .message{
         display: flex;
         justify-content: flex-end;

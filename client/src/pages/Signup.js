@@ -46,7 +46,6 @@ const Signup = () => {
 
             const { username, email, password } = data
             const response = await sendPost("auth/signup", { username, email, password });
-            console.log(response)
 
             if (response.status === 201) {
                 const { accessToken, refreshToken } = response.data.token
