@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 const Message = ({ messages }) => {
-    console.log(messages)
+
     return (
         <Container>
             {
@@ -17,6 +17,7 @@ const Message = ({ messages }) => {
 const Container = styled.div`
   height: 80%;
   width:100%;
+  overflow: auto;
   background-color: #e6eaea;
     .message{
         display: flex;

@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import { IoMdSend } from "react-icons/io";
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
-const Input = () => {
+const Input = ({ currentUser, user, addNewMessage }) => {
+    const [msg, setMsg] = useState("")
+
+    const submitHandler = async (event) => {
+        event.preventDefault();
+        if (msg && msg?.trim()) {
+            await axios.post("http://localhost:4000/message", {
+                from: user._id,
+                to: currentUser._id,
+                message: msg
+
+            });
+            addNewMessage({id:uuidv4(),fromSelf:true,message:msg})
+            setMsg("")
+        }
+    }
     return (
-        <Container>
-            <form className="input-container"  >
+        <Container >
+            <form className="input-container" onSubmit={submitHandler} >
                 <input
                     type="text"
                     placeholder="Write your message"
-                //   onChange={(e) => setMsg(e.target.value)}
-                //   value={msg}
+                    onChange={(e) => setMsg(e.target.value)}
+                    value={msg}
                 />
                 <button type="submit">
                     <IoMdSend />
@@ -41,7 +58,7 @@ const Container = styled.div`
         padding-left: 1rem;
         font-size: 1.2rem;
         &::selection {
-            background-color: #9a86f3;
+            background-color: #34baeb;
         }
         &:focus {
             outline: none;
@@ -54,7 +71,7 @@ const Container = styled.div`
         border: none;
         color:white;
         font-size: 2rem;
-        
+        cursor: pointer;
     }
   }
 }`;

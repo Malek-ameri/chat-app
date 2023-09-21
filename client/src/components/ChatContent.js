@@ -14,21 +14,25 @@ const ChatContent = ({ currentUser, user }) => {
     const [messages,setMassages] = useState([])
 
     useEffect(() => {
-        console.log("inja")
+
         const getMessages = async () => {
             const response = await axios.post("http://localhost:4000/message/all", { from: user._id, to: currentUser._id });
             setMassages(response.data)
         };
         getMessages()
 
-    }, [currentUser])
+    }, [currentUser]);
+
+    const addNewMessage = ( message ) =>{
+        setMassages([...messages,message])
+    }
 
     return (
         <>
             <Container>
                 <Header currentUser={currentUser} />
                 <Message messages= {messages} />
-                <Input />
+                <Input  currentUser={currentUser} user={user} addNewMessage={addNewMessage} />
             </Container>
         </>
     );
