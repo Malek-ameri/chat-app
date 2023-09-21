@@ -17,7 +17,6 @@ const ChatContent = ({ currentUser, user }) => {
         console.log("inja")
         const getMessages = async () => {
             const response = await axios.post("http://localhost:4000/message/all", { from: user._id, to: currentUser._id });
-            console.log(response.data)
             setMassages(response.data)
         };
         getMessages()
