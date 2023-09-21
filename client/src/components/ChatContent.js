@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 
 import styled from 'styled-components';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 
 import Header from './Header';
@@ -9,7 +10,7 @@ import Input from './Input';
 import Message from './Message';
 
 
-const ChatContent = ({ currentUser, user }) => {
+const ChatContent = ({ currentUser, user,socket }) => {
 
     const [messages,setMassages] = useState([])
 
@@ -23,8 +24,17 @@ const ChatContent = ({ currentUser, user }) => {
 
     }, [currentUser]);
 
+    useEffect(() =>{
+        if(socket.current){
+            socket.current.on("msg-recieve", msg => {
+                console.log(msg)
+                addNewMessage({id:uuidv4(),fromSelf:false,message:msg})
+            })
+        }
+    },[])
+
     const addNewMessage = ( message ) =>{
-        setMassages([...messages,message])
+        setMassages((prev) => [...prev,message])
     }
 
     return (
@@ -32,7 +42,7 @@ const ChatContent = ({ currentUser, user }) => {
             <Container>
                 <Header currentUser={currentUser} />
                 <Message messages= {messages} />
-                <Input  currentUser={currentUser} user={user} addNewMessage={addNewMessage} />
+                <Input  currentUser={currentUser} user={user} addNewMessage={addNewMessage} socket={socket} />
             </Container>
         </>
     );

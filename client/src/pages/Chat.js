@@ -11,8 +11,7 @@ import ChatContent from '../components/ChatContent';
 
 const Chat = () => {
 
-    const socket = io("http://localhost:4000", {
-    })
+    const socket = useRef()
 
     const navigate = useNavigate()
 
@@ -40,6 +39,13 @@ const Chat = () => {
         authUser()
     }, [])
 
+
+    if (user) {
+        socket.current = io("http://localhost:4000");
+        socket.current.emit("add-user",user._id)
+    }
+
+
     const changeCurrentUserHandler = (index, data) => {
         setCurrentUser(data)
     }
@@ -54,7 +60,7 @@ const Chat = () => {
                             <Contacts user={user} contacts={contacts} changeHandler={changeCurrentUserHandler} />
                         </div>
 
-                        {currentUser ? <ChatContent user={user} currentUser={currentUser} /> : <Welcom user={user} />}
+                        {currentUser ? <ChatContent user={user} currentUser={currentUser} socket={socket} /> : <Welcom user={user} />}
                     </Container>
                 </div> : <h1>loading</h1>}
         </>)

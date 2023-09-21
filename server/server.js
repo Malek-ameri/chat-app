@@ -15,6 +15,7 @@ const port = process.env.PORT
 const host = process.env.HOST
 
 const { app } = require("./app");
+const { date } = require("joi");
 const server = createServer(app);
 
 
@@ -26,8 +27,22 @@ const io = new Server(server, {
 
 })
 
+const onlineUser = new Map()
 io.on("connection", socket => {
   console.log("someon connected ");
+
+  socket.on("add-user",(userId) => {
+    onlineUser.set(userId,socket.id)
+  });
+
+  socket.on("send-msg",(data) => {
+    const sendUserSocket = onlineUser.get(data.to)
+    if(sendUserSocket){
+      console.log("arsah shoed")
+      socket.to(sendUserSocket).emit("msg-recieve",data.message)
+    }
+  })
+
 
 });
 

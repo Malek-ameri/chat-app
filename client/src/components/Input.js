@@ -5,7 +5,7 @@ import { IoMdSend } from "react-icons/io";
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const Input = ({ currentUser, user, addNewMessage }) => {
+const Input = ({ currentUser, user, addNewMessage, socket }) => {
     const [msg, setMsg] = useState("")
 
     const submitHandler = async (event) => {
@@ -17,6 +17,12 @@ const Input = ({ currentUser, user, addNewMessage }) => {
                 message: msg
 
             });
+            socket.current.emit("send-msg", {
+                from: user._id,
+                to: currentUser._id,
+                message: msg
+            })
+            
             addNewMessage({id:uuidv4(),fromSelf:true,message:msg})
             setMsg("")
         }
